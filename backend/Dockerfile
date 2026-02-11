@@ -33,7 +33,7 @@ RUN npm install --only:production
 
 # copy the built from the builder stage
 COPY --from=builder /app/dist ./dist
-COPY --from =builder /app/prisma ./prisma
+COPY --from=builder /app/prisma ./prisma
 
 # generate prisma client
 RUN npx prisma generate
