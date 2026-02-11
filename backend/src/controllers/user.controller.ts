@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { UserService } from '../services/user.service';
+import { UserService } from '../services/user.service.js';
 
 const userService = new UserService();
 
@@ -14,7 +14,7 @@ export async function getAll(_req: Request, res: Response) {
 
 export async function getById(req: Request, res: Response) {
   try {
-    const user = await userService.getById(req.params.id);
+    const user = await userService.getById(req.params.id as string);
     if (!user) {
       return res.status(404).json({ error: 'User not found' });
     }
@@ -53,7 +53,7 @@ export async function login(req: Request, res: Response) {
 
 export async function update(req: Request, res: Response) {
   try {
-    const user = await userService.update(req.params.id, req.body);
+    const user = await userService.update(req.params.id as string, req.body);
     res.json(user);
   } catch (error) {
     res.status(500).json({ error: 'Failed to update user' });
@@ -62,7 +62,7 @@ export async function update(req: Request, res: Response) {
 
 export async function delete_(req: Request, res: Response) {
   try {
-    await userService.delete(req.params.id);
+    await userService.delete(req.params.id as string);
     res.status(204).send();
   } catch (error) {
     res.status(500).json({ error: 'Failed to delete user' });

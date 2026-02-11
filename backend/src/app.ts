@@ -3,9 +3,9 @@ import cors from 'cors';
 import helmet from 'helmet';
 import morgan from 'morgan';
 import dotenv from 'dotenv';
-import productRoutes from './routes/product.routes';
-import orderRoutes from './routes/order.routes';
-import userRoutes from './routes/user.routes';
+import productRoutes from './routes/product.routes.js';
+import orderRoutes from './routes/order.routes.js';
+import userRoutes from './routes/user.routes.js';
 
 dotenv.config();
 

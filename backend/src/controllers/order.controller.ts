@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { OrderService } from '../services/order.service';
+import { OrderService } from '../services/order.service.js';
 
 const orderService = new OrderService();
 
@@ -14,7 +14,7 @@ export async function getAll(_req: Request, res: Response) {
 
 export async function getById(req: Request, res: Response) {
   try {
-    const order = await orderService.getById(req.params.id);
+    const order = await orderService.getById(req.params.id as string);
     if (!order) {
       return res.status(404).json({ error: 'Order not found' });
     }
@@ -40,7 +40,7 @@ export async function create(req: Request, res: Response) {
 export async function updateStatus(req: Request, res: Response) {
   try {
     const { status } = req.body;
-    const order = await orderService.updateStatus(req.params.id, status);
+    const order = await orderService.updateStatus(req.params.id as string, status);
     res.json(order);
   } catch (error) {
     res.status(500).json({ error: 'Failed to update order status' });
@@ -49,7 +49,7 @@ export async function updateStatus(req: Request, res: Response) {
 
 export async function delete_(req: Request, res: Response) {
   try {
-    await orderService.delete(req.params.id);
+    await orderService.delete(req.params.id as string);
     res.status(204).send();
   } catch (error) {
     res.status(500).json({ error: 'Failed to delete order' });
