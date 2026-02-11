@@ -38,4 +38,7 @@ coverage/
 # Misc
 *.tsbuildinfo
 .eslintcache
-.*/*
+
+
+# NVM file
+.nvmrc
