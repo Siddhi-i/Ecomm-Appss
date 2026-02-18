@@ -1,26 +1,20 @@
-# Node version-package we are using to build the application
-FROM  AS builder
+FROM node:20-alpine AS builder
 
-# Set up the work directory
+WORKDIR /app
 
+COPY package.json package-lock.json ./
 
-# Copy the package files
+RUN npm install
 
+COPY . .
 
-# run the install command
+RUN npm run build
 
-
-# copy the entire code base
-
-
-# run the build command
-
-
-# something different  
 FROM nginx:alpine AS production
 
-COPY --from=builder /app/dist /usr/share/nginx/html
+COPY --from=builder /app/build /usr/share/nginx/html
 
 EXPOSE 80
 
 CMD ["nginx", "-g", "daemon off;"]
+
